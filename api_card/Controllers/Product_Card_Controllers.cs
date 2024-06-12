@@ -25,9 +25,10 @@ namespace api_card.Controllers
             {
                 List<ProductCart> p = _context.ProductCarts.Include(c => c.Product).Include(c => c.Card).ToList();
                 List<Product_CardDTO> product_CardDTOs = new List<Product_CardDTO>();
-                Product_CardDTO pr = new Product_CardDTO();
+
                 foreach (var item in p)
                 {
+                    Product_CardDTO pr = new Product_CardDTO();
                     _mapper.Map(item, pr);
                     product_CardDTOs.Add(pr);
                 }

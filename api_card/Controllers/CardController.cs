@@ -57,7 +57,7 @@ namespace api_card.Controllers
                 _context.Add(c);
                 await _context.SaveChangesAsync();
 
-                return Ok(cart);
+                return Ok(c);
             }
             catch (Exception)
             {
@@ -77,7 +77,7 @@ namespace api_card.Controllers
                     _mapper.Map(card, c);
                     _context.Update(c);
                     await _context.SaveChangesAsync();
-                    return Ok(c);
+                    return Ok(card);
                 }
             }
             catch (Exception)
