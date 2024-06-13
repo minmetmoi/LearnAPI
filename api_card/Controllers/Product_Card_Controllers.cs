@@ -79,7 +79,7 @@ namespace api_card.Controllers
                     if (p_c == null)
                     {
                         ProductCart pc = new ProductCart(productid, cardid, 1);
-                        await _context.AddRangeAsync(pc);
+                        await _context.ProductCarts.AddAsync(pc);
                         _context.SaveChangesAsync();
                         return Ok("da tao them 1 san pham vao gio hang voi productid = " + productid);
                     }

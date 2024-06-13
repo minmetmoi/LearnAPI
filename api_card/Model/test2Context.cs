@@ -66,11 +66,7 @@ namespace api_card.Model
 
                 entity.ToTable("Product_Cart");
 
-                entity.Property(e => e.ProCartId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("Pro_Cart_ID");
-
-                entity.Property(e => e.ProductId).ValueGeneratedOnAdd();
+                entity.Property(e => e.ProCartId).HasColumnName("Pro_Cart_ID");
 
                 entity.HasOne(d => d.Card)
                     .WithMany(p => p.ProductCarts)

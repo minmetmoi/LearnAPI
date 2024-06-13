@@ -44,6 +44,20 @@ namespace api_card.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet("caid")]
+        public IActionResult GetPRoductByCategoryId(int caid)
+        {
+            try
+            {
+                var p = _context.Products.Where(c => c.CategoryId == caid).ToList();
+                if (p == null) return NotFound("not found id = " + caid);
+                else return Ok(p);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
         [HttpGet("name")]
         public IActionResult GetName(string name)
         {
