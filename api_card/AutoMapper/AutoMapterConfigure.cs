@@ -11,7 +11,7 @@ namespace api_card.AutoMapper
         {
             CreateMap<Card_DTO, Cart>();
             CreateMap<ProductCart, Product_CardDTO>()
-                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.ProductId))
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.ProductName))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Product.Price))
                 ;
         }

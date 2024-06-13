@@ -40,5 +40,62 @@ namespace api_card.Controllers
                 return BadRequest();
             }
         }
+        [HttpGet("id")]
+        public async Task<IActionResult> GetAllPro_CardByCardId(int CardId)
+        {
+            try
+            {
+                List<ProductCart> p = _context.ProductCarts.Include(c => c.Product).Include(c => c.Card).Where(pc => pc.CardId == CardId).ToList();
+                List<Product_CardDTO> product_CardDTOs = new List<Product_CardDTO>();
+
+                foreach (var item in p)
+                {
+                    Product_CardDTO pr = new Product_CardDTO();
+                    _mapper.Map(item, pr);
+                    product_CardDTOs.Add(pr);
+                }
+                return Ok(product_CardDTOs);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddtoCard(int cardid, int productid)
+        {
+            try
+            {
+                var ca = _context.Carts.FirstOrDefault(c => c.CartId == cardid);
+                var pr = _context.ProductCarts.FirstOrDefault(p => p.ProductId == productid);
+                if (ca == null || pr == null)
+                {
+                    return BadRequest("null");
+                }
+                else
+                {
+                    var p_c = _context.ProductCarts.FirstOrDefault(pc => pc.ProductId == productid && pc.CardId == cardid);
+                    if (p_c == null)
+                    {
+                        ProductCart pc = new ProductCart(productid, cardid, 1);
+                        await _context.AddRangeAsync(pc);
+                        _context.SaveChangesAsync();
+                        return Ok("da tao them 1 san pham vao gio hang voi productid = " + productid);
+                    }
+                    else
+                    {
+                        p_c.Quantity += 1;
+                        _context.Update(p_c);
+                        _context.SaveChangesAsync();
+                        return Ok("da add them 1 san pham co productidd = " + productid + " va so luong = " + p_c.Quantity);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

@@ -33,11 +33,11 @@ namespace api_card.Controllers
             }
         }
         [HttpGet("id")]
-        public ActionResult GetCardByID(int id)
+        public ActionResult GetCardByUserID(int id)
         {
             try
             {
-                var card = _context.Carts.FirstOrDefault(c => c.CartId == id);
+                var card = _context.Carts.FirstOrDefault(c => c.UserId == id);
                 if (card == null) return NotFound("Not found id = " + id);
                 else { return Ok(card); }
             }

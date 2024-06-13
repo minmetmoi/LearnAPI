@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace api_card.Model
+﻿namespace api_card.Model
 {
     public partial class ProductCart
     {
+        public ProductCart(int productId, int? cardId, int? quantity)
+        {
+            ProductId = productId;
+            CardId = cardId;
+            Quantity = quantity;
+
+        }
+
         public int ProductId { get; set; }
         public int? CardId { get; set; }
         public int? Quantity { get; set; }
