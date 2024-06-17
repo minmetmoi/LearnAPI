@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace api_card.Model
 {
@@ -9,8 +8,9 @@ namespace api_card.Model
         {
             Products = new HashSet<Product>();
         }
-
+        [Required(ErrorMessage = "id is number")]
         public int CategoryId { get; set; }
+        [Required(ErrorMessage = "not null pls")]
         public string? CategoryName { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }

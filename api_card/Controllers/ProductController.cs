@@ -19,6 +19,11 @@ namespace api_card.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var list = _context.Products.ToList();
@@ -33,6 +38,11 @@ namespace api_card.Controllers
         [HttpGet("id")]
         public IActionResult GetPRoductById(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var p = _context.Products.FirstOrDefault(c => c.ProductId == id);
@@ -47,6 +57,11 @@ namespace api_card.Controllers
         [HttpGet("caid")]
         public IActionResult GetPRoductByCategoryId(int caid)
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var p = _context.Products.Where(c => c.CategoryId == caid).ToList();
@@ -61,6 +76,11 @@ namespace api_card.Controllers
         [HttpGet("name")]
         public IActionResult GetName(string name)
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var p = _context.Products.Where(c => c.ProductName.Contains(name)).ToList();

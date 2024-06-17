@@ -19,6 +19,11 @@ namespace api_card.Controllers
         [HttpGet]
         public IActionResult GetAllCategory()
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var list = _context.Categories.ToList();

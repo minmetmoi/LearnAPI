@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace api_card.Model
 {
@@ -9,8 +8,9 @@ namespace api_card.Model
         {
             ProductCarts = new HashSet<ProductCart>();
         }
-
+        [Required(ErrorMessage = "id is number")]
         public int CartId { get; set; }
+        [Required(ErrorMessage = "id is number")]
         public int? UserId { get; set; }
         public DateTime? OrderDate { get; set; }
         public string? Note { get; set; }

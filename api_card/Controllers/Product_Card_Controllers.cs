@@ -21,6 +21,11 @@ namespace api_card.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllPro_Card()
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 List<ProductCart> p = _context.ProductCarts.Include(c => c.Product).Include(c => c.Card).ToList();
@@ -43,6 +48,11 @@ namespace api_card.Controllers
         [HttpGet("id")]
         public async Task<IActionResult> GetAllPro_CardByCardId(int CardId)
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 List<ProductCart> p = _context.ProductCarts.Include(c => c.Product).Include(c => c.Card).Where(pc => pc.CardId == CardId).ToList();
@@ -65,6 +75,11 @@ namespace api_card.Controllers
         [HttpPost]
         public async Task<IActionResult> AddtoCard(int cardid, int productid)
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var ca = _context.Carts.FirstOrDefault(c => c.CartId == cardid);

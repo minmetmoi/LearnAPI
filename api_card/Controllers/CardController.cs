@@ -21,6 +21,11 @@ namespace api_card.Controllers
         [HttpGet]
         public ActionResult GetAllCarđ()
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var list = _context.Carts.ToList();
@@ -35,6 +40,11 @@ namespace api_card.Controllers
         [HttpGet("id")]
         public ActionResult GetCardByUserID(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var card = _context.Carts.FirstOrDefault(c => c.UserId == id);
@@ -50,6 +60,11 @@ namespace api_card.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertCard(Card_DTO cart)
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 Cart c = new Cart();
@@ -68,6 +83,11 @@ namespace api_card.Controllers
         [HttpPut("id")]
         public async Task<IActionResult> UpdadteCard(int id, Card_DTO card)
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var c = _context.Carts.FirstOrDefault(c => c.CartId == id);
@@ -89,6 +109,11 @@ namespace api_card.Controllers
         [HttpDelete("id")]
         public async Task<IActionResult> DeleteCard(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                // Nếu dữ liệu không hợp lệ, trả về lỗi cùng với thông tin chi tiết
+                return BadRequest(ModelState);
+            }
             try
             {
                 var c = _context.Carts.FirstOrDefault(c => c.CartId == id);
